@@ -1,11 +1,10 @@
 # Optolink
 
-Dieses Projekt liest von einer Viessmann Vitodens 200-W mit Vitotronic 200 VScotHO1 (2019) einige Daten aus und sendet diese bei Bedarf an einen MQTT Broker. Die Betriebsart kann zwischen "Abschaltbetrieb", "Nur Warmwasser" und "Heizen+Warmwasser" umgeschaltet werden.
+Dieses Projekt liest von einer Viessmann Vitodens 200 mit dem esp32 einige Daten aus und sendet diese bei Bedarf an einen MQTT Broker. Die Betriebsart kann zwischen "Abschaltbetrieb", "Nur Warmwasser" und "Heizen+Warmwasser" umgeschaltet werden.
 Fehlercodes werden in Fehlermeldungen übersetzt.
 Die Datenpunkte werden automatisch im Webinterface mit dem aktuellen Wert angezeigt. Aktuelle Werte werden per AJAX nachgeladen.
 
-[Projektdetails auf meinem Blog](https://blog.mt88.eu/2022/10/27/viessmann-heizungsdaten-2-0/)
-
+[Bauanleitung](https://github.com/openv/openv/wiki/Bauanleitung-ESP32-Adafruit-Feather-Huzzah32-and-Proto-Wing)
 
 ## Einrichtung
 
