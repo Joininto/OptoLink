@@ -1,7 +1,7 @@
 #pragma once
 #include <PubSubClient.h>
 #include "Logging.h"
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
 
 extern PubSubClient mqttClient;
 

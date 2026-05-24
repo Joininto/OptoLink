@@ -42,7 +42,7 @@ OptolinkKW::OptolinkKW() :
 
 #ifdef ARDUINO_ARCH_ESP32
 void OptolinkKW::begin(SoftwareSerial* serial, int8_t rxPin, int8_t txPin) {
-  serial->begin(4800, SERIAL_8E2, rxPin, txPin);
+  serial->begin(4800, SWSERIAL_8E2, rxPin, txPin);
   _stream = serial;
   // serial->flush();
 }

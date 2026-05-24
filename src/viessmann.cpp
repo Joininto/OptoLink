@@ -69,7 +69,7 @@ void stoerungsmeldungCallbackHandler(const IDatapoint& dp, DPValue value);
 void addValueToLiveData(const IDatapoint& dp, String value, String value_str);
 
 void setupVito() {
-    VitoWiFi.setup(&swSer);
+    VitoWiFi.setup(&swSer, 16, 17);
     VitoWiFi.setGlobalCallback(&globalCallbackHandler);
     betriebsart.setCallback(&omCallbackHandler);        // convert operation modes to text
     umschaltventil.setCallback(&swCallbackHandler);     // convert switch valve modes to text

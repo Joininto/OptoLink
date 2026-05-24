@@ -15,13 +15,13 @@ String GLOBAL::MqttPassword = "";
 
 void readConfig() {
 	LittleFS.begin();
-	File configFile = LittleFS.open("_configFile", "r");
+	File configFile = LittleFS.open("/config.json", "r");
 	if (configFile) {
 		//Log("lese Config-Datei...\n" + configFile.readString());
 	} else {
 		Log("Config file does not exist");
 		resetConfig();
-		configFile = LittleFS.open("_configFile", "r");
+		configFile = LittleFS.open("/config.json", "r");
 	}
 
 	configFile.seek(0);
@@ -38,7 +38,7 @@ void readConfig() {
 
 void saveConfig() {
 	Log("Write config file...");
-	File configFile = LittleFS.open("_configFile", "w");
+	File configFile = LittleFS.open("/config.json", "w");
 	configFile.println(GLOBAL::WlanSSID); 		// WLAN SSID
 	configFile.println(GLOBAL::WlanPasswd); 	// WLAN password
 	configFile.println(GLOBAL::NtpServerIP); 	// NTP server
@@ -48,14 +48,14 @@ void saveConfig() {
 	configFile.println(GLOBAL::MqttUsername);	// MQTT Username
 	configFile.println(GLOBAL::MqttPassword);	// MQTT Password
 	configFile.close();
-	configFile = LittleFS.open("_configFile", "r");
+	configFile = LittleFS.open("/config.json", "r");
 	//Log(configFile.readString());
 	configFile.close();
 }
 
 void resetConfig() {
 	Log("Create default settings");
-	File configFile = LittleFS.open("_configFile", "w");
+	File configFile = LittleFS.open("/config.json", "w");
 	configFile.println(""); 					// WLAN SSID
 	configFile.println(""); 					// WLAN password
 	configFile.println(""); 					// NTP server

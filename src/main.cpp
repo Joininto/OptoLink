@@ -1,19 +1,19 @@
 #include <Timer.h>
 
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
 #include <ArduinoOTA.h>
-#include <ESP8266mDNS.h>
+#include <ESPmDNS.h>
 
 #include "mqtt.h"
-#include "logging.h"
-#include "webServer.h"
+#include "Logging.h"
+#include "MyWebServer.h"
 #include "viessmann.h"
 #include "filesystem.h"
 #include "ntpclient.h"
 
 Timer t;
 
-const int LED_PIN = LED_BUILTIN;
+const int LED_PIN = 2;
 
 const IPAddress _STA_ip = IPAddress(192,168,0,1);
 const IPAddress _STA_gw = IPAddress(192,168,0,1);
@@ -73,7 +73,7 @@ void setup() {
 		}
 
 		StartWebServer();
-		swSer.begin(4800, SWSERIAL_8E2, D2, D1);
+		swSer.begin(4800, SWSERIAL_8E2, 16, 17);
 
 		setupVito();
 
@@ -88,7 +88,7 @@ void setup() {
 }
 
 void loop() {
-	WebServer.handleClient();
+	server.handleClient();
 	if (!configMode) {
 		ArduinoOTA.handle();
 		mqttClient.loop();
@@ -121,7 +121,7 @@ void getValues() {
 void setupWiFi() {
 	Log("Connecting to WLAN");
 	WiFi.mode(WIFI_STA);
-	wifi_set_sleep_type(NONE_SLEEP_T);
+	WiFi.setSleep(false);
 	WiFi.setAutoReconnect(true);
 	WiFi.hostname("OptoLink");
 	WiFi.begin(GLOBAL::WlanSSID, GLOBAL::WlanPasswd);
