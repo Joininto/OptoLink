@@ -22,15 +22,16 @@ DPTemp warmwasserSollTemp("WarmwasserSollTemp", " °C", 0x6300);
 DPTemp warmwasserIstTemp("WarmwasserIstTemp", " °C", 0x0804);
 DPTemp vorlaufSollTemp("VorlaufSollTemp", " °C", 0x3544);
 DPTemp vorlaufIstTemp("VorlaufIstTemp", " °C", 0x3900);
-DPTemp kollektorTemp("KollektorTemp", " °C", 0x6564);
-DPTemp solarspeicherTemp("SolarspeicherTemp", " °C", 0x6566);
-DPMode nachladeunterdrueckung("Nachladeunterdrückung", "", 0x6551);
-DPMode solarpumpe("Solarpumpe", "", 0x6552);
+//DPTemp kollektorTemp("KollektorTemp", " °C", 0x6564);
+//DPTemp solarspeicherTemp("SolarspeicherTemp", " °C", 0x6566);
+//DPMode nachladeunterdrueckung("Nachladeunterdrückung", "", 0x6551);
+//DPMode solarpumpe("Solarpumpe", "", 0x6552);
 DPCount waermemenge("Wärmemenge", " kWh", 0x6560);
-DPCount solartagesertrag("Solartagesertrag", " Wh", 0xCF30);
-DPMode solarinfo("Solarinfo", "", 0x7754);
+//DPCount solartagesertrag("Solartagesertrag", " Wh", 0xCF30);
+//DPMode solarinfo("Solarinfo", "", 0x7754);
 DPMode speicherladepumpe("Speicherladepumpe", "", 0x6513);
-DPMode betriebsart("Betriebsart", "", 0x3323);
+//DPMode betriebsart("Betriebsart", "", 0x3323);
+DPMode betriebsart("Betriebsart", "", 0x7579);
 DPMode sparbetrieb("Sparbetrieb", "", 0x3302);
 DPMode partybetrieb("Partybetrieb", "", 0x3303);
 DPHours brennerlaufzeit("Brennerlaufzeit", " Std.", 0x0886);
@@ -73,8 +74,8 @@ void setupVito() {
     VitoWiFi.setGlobalCallback(&globalCallbackHandler);
     betriebsart.setCallback(&omCallbackHandler);        // convert operation modes to text
     umschaltventil.setCallback(&swCallbackHandler);     // convert switch valve modes to text
-    nachladeunterdrueckung.setCallback(&boolCallbackHandler);
-    solarpumpe.setCallback(&boolCallbackHandler);
+    //nachladeunterdrueckung.setCallback(&boolCallbackHandler);
+    //solarpumpe.setCallback(&boolCallbackHandler);
     sparbetrieb.setCallback(&boolCallbackHandler);
     partybetrieb.setCallback(&boolCallbackHandler);
     umwaelzpumpe.setCallback(&boolCallbackHandler);
