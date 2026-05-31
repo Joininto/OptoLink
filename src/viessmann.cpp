@@ -18,24 +18,30 @@ DPHours betriebsstunden("Betriebsstunden", " Std.", 0x6568);
 DPTemp abgasTemp("AbgasTemp", " °C", 0x0808);
 DPTemp kesselIstTemp("KesselIstTemp", " °C", 0x0802);
 DPTemp kesselSollTemp("KesselSollTemp", " °C", 0x555A);
-DPTemp warmwasserSollTemp("WarmwasserSollTemp", " °C", 0x6300);
+DPTempS warmwasserSollTemp("WarmwasserSollTemp", " °C", 0x6300);
 DPTemp warmwasserIstTemp("WarmwasserIstTemp", " °C", 0x0804);
-DPTemp vorlaufSollTemp("VorlaufSollTemp", " °C", 0x3544);
-DPTemp vorlaufIstTemp("VorlaufIstTemp", " °C", 0x3900);
+//DPTemp vorlaufSollTemp("VorlaufSollTemp", " °C", 0x3544);//old//not working
+DPTemp vorlaufSollTemp("VorlaufSollTemp", " °C", 0x2544);
+//DPTemp vorlaufIstTemp("VorlaufIstTemp", " °C", 0x3900);//old//not working
+DPTemp vorlaufIstTemp("VorlaufIstTemp", " °C", 0x2900);
 //DPTemp kollektorTemp("KollektorTemp", " °C", 0x6564);
 //DPTemp solarspeicherTemp("SolarspeicherTemp", " °C", 0x6566);
 //DPMode nachladeunterdrueckung("Nachladeunterdrückung", "", 0x6551);
 //DPMode solarpumpe("Solarpumpe", "", 0x6552);
-DPCount waermemenge("Wärmemenge", " kWh", 0x6560);
+DPCount waermemenge("Wärmemenge", " kWh", 0x6560);//ohne wirkung
 //DPCount solartagesertrag("Solartagesertrag", " Wh", 0xCF30);
 //DPMode solarinfo("Solarinfo", "", 0x7754);
 DPMode speicherladepumpe("Speicherladepumpe", "", 0x6513);
-//DPMode betriebsart("Betriebsart", "", 0x3323);
-DPMode betriebsart("Betriebsart", "", 0x7579);
-DPMode sparbetrieb("Sparbetrieb", "", 0x3302);
-DPMode partybetrieb("Partybetrieb", "", 0x3303);
+//DPMode betriebsart("Betriebsart", "", 0x3323);//old
+DPMode betriebsart("Betriebsart", "", 0x2323);
+//DPMode sparbetrieb("Sparbetrieb", "", 0x3302);//old//not working
+DPMode sparbetrieb("Sparbetrieb", "", 0x2302);
+//DPMode partybetrieb("Partybetrieb", "", 0x3303);//old//not working
+DPMode partybetrieb("Partybetrieb", "", 0x2303);
 DPHours brennerlaufzeit("Brennerlaufzeit", " Std.", 0x0886);
 DPMode brennerstoerung("Brennerstörung", "", 0x0883);
+//DPMode brennerstoerung("Brennerstörung", "", 0x7579);//neu
+DPMode sammelstoerung("Sammelstörung", "", 0x0802);
 DPCount brennerstarts("Brennerstarts", "", 0x088A);
 DPMode flamme("Flamme", " %", 0x55D3);
 DPMode umschaltventil("Umschaltventil", "", 0x0A10);
@@ -43,6 +49,8 @@ DPMode umwaelzpumpe("Umwälzpumpe", "", 0x7660);
 DPMode umwaelzpumpeDrehzahl("UmwälzpumpeDrehzahl", " %", 0x0A3C);
 DPMode heizkreispumpe("Heizkreispumpe", "", 0x3906);
 //Notice: no working error datapoint found
+
+DPMode** bla = {};
 
 DPRaw stoerungsmeldung1("Störungsmeldung1", "boiler", 0x7507);
 DPRaw stoerungsmeldung2("Störungsmeldung2", "boiler", 0x7510);
@@ -70,6 +78,15 @@ void stoerungsmeldungCallbackHandler(const IDatapoint& dp, DPValue value);
 void addValueToLiveData(const IDatapoint& dp, String value, String value_str);
 
 void setupVito() {
+
+    bla = new DPMode*[200];
+    for (int i = 0; i < 200; ++i) {
+        char str[20];
+        snprintf(str, sizeof(str), "%d", i);
+        bla[i] = new DPMode(str, "", i);
+    }
+    //new DPMode("Bla", "", 0x0802);    // just for testing, not working
+
     VitoWiFi.setup(&swSer, 16, 17);
     VitoWiFi.setGlobalCallback(&globalCallbackHandler);
     betriebsart.setCallback(&omCallbackHandler);        // convert operation modes to text

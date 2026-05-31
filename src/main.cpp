@@ -172,6 +172,6 @@ void setupArduinoOta() {
 			//Serial.println("End Failed");
 		}
 		});
-	ArduinoOTA.setHostname("optolink");
+	//ArduinoOTA.setHostname("optolink");
 	ArduinoOTA.begin();
 }
